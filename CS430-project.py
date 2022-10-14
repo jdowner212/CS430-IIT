@@ -1,7 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env pythona
 # coding: utf-8
 
-# In[1]:
 
 
 import numpy as np
@@ -12,8 +11,6 @@ from   tkinter import *
 from   os.path import exists
 from   collections import deque
 
-
-# In[2]:
 
 
 class Huff_Node(object):
@@ -124,7 +121,12 @@ class Huff_Tree:
         return str(self)
 
 
-# In[3]:
+class WrappingLabel(tk.Label):
+    '''a type of Label that automatically adjusts the wrap to the size'''
+    def __init__(self, master=None, **kwargs):
+        tk.Label.__init__(self, master, **kwargs)
+        self.bind('<Configure>', lambda e: self.config(wraplength=self.winfo_width()))
+
 
 
 def file_exists(path):
@@ -392,7 +394,7 @@ class App:
         self.entry_DecodedFileName  = decoded_file
 
         master.title("Huffman Tree Encoding")
-        master.geometry("1028x500")
+        master.geometry("500x500")
         master.configure(bg=None)
 
         ################ Home Page ################ 
@@ -555,9 +557,8 @@ class App:
             def showEncoded_(t):
                 showEncoded = Tk()
                 showEncoded.title(self.this_title)
-                showEncoded.geometry("1500x1000")
-
-                info = Label(showEncoded, text=t, justify=LEFT, wraplength=1000).pack()
+                showEncoded.geometry("500x500")
+                info = WrappingLabel(showEncoded, text=t, justify=LEFT, wraplength=1000).pack(expand=True, fill=tk.X)
                 buttonClose = Button(showEncoded, text='exit',
                                      command=showEncoded.destroy).pack(side= BOTTOM, pady = 100)
                 showEncoded.mainloop()
@@ -639,9 +640,8 @@ class App:
             def showResults(t):
                 showInfo = Tk()
                 showInfo.title("Decoded Text")
-                showInfo.geometry("1500x1000")
-
-                info = Label(showInfo, text=t, justify=LEFT, wraplength=1000).pack()
+                showInfo.geometry("500x500")
+                info = WrappingLabel(showInfo, text=t, justify=LEFT, wraplength=1000).pack(expand=True, fill=tk.X)
                 buttonClose = Button(showInfo, text='exit',
                                      command=showInfo.destroy).pack(side= BOTTOM, pady=100)
                 showInfo.mainloop()
@@ -654,10 +654,3 @@ root = tk.Tk()
 application = App(root)
 application.start_up()
 root.mainloop()
-
-
-# In[ ]:
-
-
-
-
